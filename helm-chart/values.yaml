@@ -13,11 +13,10 @@ service:
   ports: 
     port: 8080
     name: health-metric
+  namespace: wenyuan-test
 
 prometheus:
   enabled: true
   namespace: cattle-prometheus
   interval: 15s
   #scrapeTimeout: 10s
-  selector:
-     prometheus: kube-prometheus

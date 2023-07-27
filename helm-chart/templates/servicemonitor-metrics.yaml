@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ .Chart.Name }}
-  namespace: cattle-prometheus
+  namespace: {{ .Values.prometheus.namespace }}
   labels:
    team: frontend
 spec:
@@ -11,7 +11,7 @@ spec:
       app: {{ .Chart.Name }}
   namespaceSelector:
      matchNames:
-       - wenyuan-test
+       - {{ .Values.service.namespace }}
   endpoints:
     - port: {{ .Values.service.ports.name }}
-      interval: 15s
+      interval: {{ .Values.prometheus.interval }}

@@ -4,12 +4,10 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     app: {{ .Chart.Name }}
-  namespace: wenyuan-test
+  namespace: {{ .Values.service.namespace }}
 spec:
   ports:
   - name: {{ .Values.service.ports.name }}
     port: {{ .Values.service.ports.port }}
-#    targetPort: metrics
-#   protocol: TCP
   selector:
     app: {{ .Chart.Name }}
