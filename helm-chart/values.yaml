@@ -1,0 +1,23 @@
+# values.yaml
+image:
+  repository: wenyuan1010/health-check-exporter
+  tag: v3.0
+  pullPolicy: IfNotPresent
+
+healthUrls: 
+   - "http://iot-device-management.iot.svc.cluster.local:8080/actuator/health"
+   - "http://iot-linkage-engine.iot.svc.cluster.local:8080/actuator/health"
+
+service:
+  type: ClusterIP
+  ports: 
+    port: 8080
+    name: health-metric
+
+prometheus:
+  enabled: true
+  namespace: cattle-prometheus
+  interval: 15s
+  #scrapeTimeout: 10s
+  selector:
+     prometheus: kube-prometheus
