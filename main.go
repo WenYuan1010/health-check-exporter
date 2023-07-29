@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -39,12 +40,17 @@ func (c *CustomCollector) Collect(ch chan<- prometheus.Metric) {
 	urls := strings.Split(healthURLs, ",")
 	systemHealth := 1.0 // 假设系统健康
 
+	// Create a new HTTP client with a timeout of 1 second
+	httpClient := &http.Client{
+		Timeout: 1 * time.Second,
+	}
+
 	for _, url := range urls {
 		// 提取状态值并将其设置为 Gauge 值
 		statusValue := 0.0
 
 		// 获取健康端点并解析响应
-		resp, err := http.Get(url)
+		resp, err := httpClient.Get(url)
 		if err != nil {
 			fmt.Println("获取健康端点时出错:", err)
 			c.statusGauge.WithLabelValues(url).Set(statusValue)
@@ -67,6 +73,9 @@ func (c *CustomCollector) Collect(ch chan<- prometheus.Metric) {
 			systemHealth = 0.0 // 如果有一个URL不健康，系统健康就为0
 			continue
 		}
+
+		// Output the status and corresponding URL
+		fmt.Printf("URL: %s, 状态: %s\n", url, healthResp.Status)
 
 		if healthResp.Status == "UP" {
 			statusValue = 1.0
@@ -109,5 +118,5 @@ func main() {
 
 	// 通过 HTTP 公开指标
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8081", nil)
 }
