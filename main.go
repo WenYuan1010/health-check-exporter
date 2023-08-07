@@ -14,9 +14,11 @@ import (
 )
 
 var healthURLs string
+var listenAddr string
 
 func init() {
 	flag.StringVar(&healthURLs, "health-urls", "", "Comma-separated list of URLs for health check endpoints")
+	flag.StringVar(&listenAddr, "listen-addr", ":8080", "listen address")
 	flag.Parse()
 }
 
@@ -118,5 +120,5 @@ func main() {
 
 	// 通过 HTTP 公开指标
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":8081", nil)
+	http.ListenAndServe(listenAddr, nil)
 }
