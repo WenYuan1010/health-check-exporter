@@ -30,7 +30,7 @@ https://hub.docker.com/r/wenyuan1010/health-check-exporter/
 | --- | --- | --- |
 |  -health-urls| 监控微服务地址 |  |
 |  -listen-addr| 监听地址 | 默认是:8080 |
-|  -timeout-seconds| 超时时间 | 默认是1s,这个是请求healthUrls的超时时间 |
+|  -timeout-seconds| 超时时间 |单位为s; 默认是1s,这个是请求healthUrls的超时时间 |
 
 ![image](https://github.com/WenYuan1010/health-check-exporter/assets/105798640/383da9dd-651c-4af8-82c9-245a14bc3530)
 
