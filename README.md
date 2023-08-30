@@ -24,3 +24,11 @@ https://hub.docker.com/r/wenyuan1010/health-check-exporter/
 |  system_health| 布尔值（1 正常 0 不正常） | 只要有一个application_health为0，system_health就为0；application_health全为1时system_health=1 |
 
 ![image](https://github.com/WenYuan1010/health-check-exporter/assets/105798640/2d6707c0-4b10-403a-863a-d60c809c0b8f)
+
+### 4flag
+|flag| 解释 | 备注 |
+| --- | --- | --- |
+|  -health-urls| 监控微服务地址 |  |
+|  -listen-addr| 监听地址 | 默认是:8080 |
+
+![image](https://github.com/WenYuan1010/health-check-exporter/assets/105798640/6a9109c1-a676-4856-a666-4a5fc7a2300a)
