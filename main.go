@@ -15,10 +15,12 @@ import (
 
 var healthURLs string
 var listenAddr string
+var timeoutSeconds int
 
 func init() {
 	flag.StringVar(&healthURLs, "health-urls", "", "Comma-separated list of URLs for health check endpoints")
 	flag.StringVar(&listenAddr, "listen-addr", ":8080", "listen address")
+	flag.IntVar(&timeoutSeconds, "timeout-seconds", 1, "Timeout in seconds for HTTP requests")
 	flag.Parse()
 }
 
@@ -41,10 +43,9 @@ func (c *CustomCollector) Describe(ch chan<- *prometheus.Desc) {
 func (c *CustomCollector) Collect(ch chan<- prometheus.Metric) {
 	urls := strings.Split(healthURLs, ",")
 	systemHealth := 1.0 // 假设系统健康
-
-	// Create a new HTTP client with a timeout of 1 second
+	// Create a new HTTP client with a timeout
 	httpClient := &http.Client{
-		Timeout: 1 * time.Second,
+		Timeout: time.Duration(timeoutSeconds) * time.Second,
 	}
 
 	for _, url := range urls {
