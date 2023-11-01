@@ -7,7 +7,11 @@ image:
 healthUrls: 
    - "http://iot-device-management.iot.svc.cluster.local:8080/actuator/health"
    - "http://iot-linkage-engine.iot.svc.cluster.local:8080/actuator/health"
-
+   - "http://iot-linkage-engine.ioms-alm.svc.cluster.local:8080/actuator/health"
+   - "http://iot-linkage.ioms-alm.svc.cluster.local:8080/actuator/health"
+   - "http://10.4.0.123:8080"
+timeoutSeconds: 5
+labels: "iot2:,ioms-alm:"
 service:
   type: ClusterIP
   ports: 

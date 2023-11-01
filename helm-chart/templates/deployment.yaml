@@ -23,3 +23,5 @@ spec:
               containerPort: {{ .Values.service.ports.port }}
           args:
             - "--health-urls={{ .Values.healthUrls | join "," }}"
+            - "--timeout-seconds={{ .Values.timeoutSeconds}}"
+            - "--labels={{ .Values.labels}}"
