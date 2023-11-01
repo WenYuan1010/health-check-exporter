@@ -21,7 +21,7 @@ https://hub.docker.com/r/wenyuan1010/health-check-exporter/
 |指标| 数据类型 | 备注 |
 | --- | --- | --- |
 |  application_health| 布尔值（1 正常 0 不正常） | 不同微服务的健康状态可通过url来区分 |
-|  system_health| 布尔值（1 正常 0 不正常） | 只要有一个application_health为0，system_health就为0；application_health全为1时system_health=1 |
+|  system_health| 布尔值（1 正常 0 不正常） | 针对url带有health的才会根据标签来输出系统的健康状态，系统里面所有的服务中只要有一个不是1，system_health就是0|
 
 ![image](https://github.com/WenYuan1010/health-check-exporter/assets/105798640/2d6707c0-4b10-403a-863a-d60c809c0b8f)
 
